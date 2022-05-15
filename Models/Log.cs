@@ -16,6 +16,7 @@ namespace LogBook.Models
         public DateTime Time { get; set; }
         public float Frequency { get; set; }
         public string Mode { get; set; }
+        [Display(Name ="Power (W)")]
         public int Power { get; set; }
         [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         [Required]
