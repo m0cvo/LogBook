@@ -1,4 +1,10 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using LogBook.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<LogBookContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LogBookContext") ?? throw new InvalidOperationException("Connection string 'LogBookContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -22,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Logs}/{action=Index}/{id?}");
 
 app.Run();
