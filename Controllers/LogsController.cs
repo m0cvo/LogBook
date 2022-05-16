@@ -20,11 +20,18 @@ namespace LogBook.Controllers
         }
 
         // GET: Logs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-              return _context.Log != null ? 
-                          View(await _context.Log.ToListAsync()) :
-                          Problem("Entity set 'LogBookContext.Log'  is null.");
+            var logs = from m in _context.Log select m;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                logs = logs.Where(s => s.Callsign!.Contains(searchString));
+            }
+            return View(await logs.ToListAsync());
+              //return _context.Log != null ? 
+              //            View(await _context.Log.ToListAsync()) :
+              //            Problem("Entity set 'LogBookContext.Log'  is null.");
         }
 
         // GET: Logs/Details/5
