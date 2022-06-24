@@ -18,7 +18,7 @@ namespace LogBook.Models
         public string Mode { get; set; }
         [Display(Name ="Power (W)")]
         public int Power { get; set; }
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
+        
         [Required]
         [StringLength(12)]
         public string Callsign { get; set; }
